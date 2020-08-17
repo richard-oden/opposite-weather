@@ -56,37 +56,27 @@ h3 {
 	transform-style: preserve-3d;
 }
 
-#cube:hover {
-	transform: rotateY(-270deg);
-}
-
 .front,
 .back {
     font-size: 2.6vmin;
     color: #fff;
     padding: 1em;
     background: #6186ad url('weather-pattern-lines.png') no-repeat center;
-    background-size: cover;
 }
 
 .left {
     background: #000 url('earth1.jpg') no-repeat right center;
-    background-size: cover;
 }
 
 .right {
     background: #000 url('earth2.jpg') no-repeat left center;
-    background-size: cover;
 }
 
-.front,
-.back,
-.left,
-.right {
+#cube>div {
 	width: 100%;
 	height: 100%;
-	display: block;
-	position: absolute;
+    position: absolute;
+    background-size: cover;
 }
 
 .front {
@@ -109,7 +99,7 @@ h3 {
 
 #cube h2 {
     font-size: 2em;
-    margin: 0 0 0 1em;
+    margin: 0;
 }
 
 #cube label {
@@ -124,8 +114,8 @@ h3 {
     width: 100%;
 }
 
-#form input,
-#form button {
+#cube input,
+#cube button {
     font: .8em 'Open Sans', sans-serif;
     padding: .4em;
     margin: .2em;
@@ -139,7 +129,7 @@ h3 {
     flex: 1;
 }
 
-#form button:hover {
+#cube button:hover {
     cursor: pointer;
 }
 
