@@ -1,0 +1,153 @@
+/* Base Element Styles --------------- */
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font: 1em/1.5 'Open Sans', sans-serif;
+	color: #373737;
+	background: #eaeaea;
+    margin: 0;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 100px 1fr 80px;
+}
+
+h1,
+h2,
+h3 {
+	text-transform: uppercase;
+}
+
+/* Page Elements --------------- */
+
+#main-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    object-fit: contain;
+	width: 40px;
+}
+
+.name {
+	font-size: 1.65em;
+	font-weight: 800;
+}
+
+.name span {
+	font-weight: 300;
+	margin-left: -7px;
+}
+
+#container {
+	max-width: 60vmin;
+	text-align: center;
+    box-shadow: 0 18px 40px 5px rgba(0,0,0,.4);
+	perspective: 1500px;
+}
+
+#cube {
+	transition: transform 2s ease-in-out;
+	width: 60vmin; height: 60vmin;
+	transform-style: preserve-3d;
+}
+
+#cube:hover {
+	transform: rotateY(-270deg);
+}
+
+.front,
+.back {
+    font-size: 2.6vmin;
+    color: #fff;
+    padding: 1em;
+    background: #6186ad url('weather-pattern-lines.png') no-repeat center;
+    background-size: cover;
+}
+
+.left {
+    background: #000 url('earth1.jpg') no-repeat right center;
+    background-size: cover;
+}
+
+.right {
+    background: #000 url('earth2.jpg') no-repeat left center;
+    background-size: cover;
+}
+
+.front,
+.back,
+.left,
+.right {
+	width: 100%;
+	height: 100%;
+	display: block;
+	position: absolute;
+}
+
+.front {
+	transform: translate3d(0, 0, 30vmin);
+}
+
+.back {
+	transform: translateZ(-30vmin) rotateY(270deg);
+	transform-origin: center left;
+}
+
+.left {
+	transform: rotateY(-270deg) translate3d(30vmin, 0, 0);
+	transform-origin: top right;
+}
+
+.right {
+	transform: translateZ(-30vmin) rotateY(180deg);
+}
+
+#cube h2 {
+    font-size: 2em;
+    margin: 0 0 0 1em;
+}
+
+#cube label {
+    font-size: .8em;
+    font-weight: 600;
+    margin-bottom: 1em;
+}
+
+#form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#form input,
+#form button {
+    font: .8em 'Open Sans', sans-serif;
+    padding: .4em;
+    margin: .2em;
+}
+
+#form input {
+    flex: 4;
+}
+
+#form button {
+    flex: 1;
+}
+
+#form button:hover {
+    cursor: pointer;
+}
+
+/* Utility --------------- */
+
+.center-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

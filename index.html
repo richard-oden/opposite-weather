@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style.css">
+    <title>Opposite Weather</title>
+</head>
+<body>
+    <header id="main-header">
+        <img class="logo" src="globe.png">
+        <h1 class="name">Opposite <span>Weather</span></h1>
+    </header>
+    <main class="center-content">
+        <div id="container">
+            <div id="cube">
+                <div class="front center-content">
+                    <h2>Where are you?</h2>
+                    <label for="user-loc">Enter your location below to find out what the weather is like on the other side of the world.</label>
+                    <div id="form">
+                        <input type="text" id="user-loc" placeholder="e.g. Louisville, KY, United States">
+                        <button onclick="runApp()">Go!</button>
+                    </div>
+                </div>
+                <div class="back center-content">
+                    <p>Aenean lacinia bibendum nulla sed consectetur. Fusce dapibus, tellus ac cursus commodo. Aenean lacinia bibendum nulla sed consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+                </div>
+                <div class="left"></div>
+                <div class="right"></div>
+            </div>
+        </div>
+    </main>
+    <foote id="main-footer">
+
+    </footer>
+</body>
+</html>
