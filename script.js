@@ -21,12 +21,10 @@ function handleInput(inputStr) {
     return urlSubStr;
 }
 
-function calcAntipode([lat, lon]) {
+function calcAntipode(lat, lon) {
     let newLat = lat * -1;
-    let newLon;
-    [lon+180, lon-180].forEach(possibleLon => {
-        if (possibleLon > -180 && possibleLon < 180) newLon = possibleLon;
-    });
+    let pLon = 180 - Math.abs(lon);
+    let newLon = (pLon >= 0 && lon >= 0) || (pLon < 0 && lon < 0) ? pLon * -1 : pLon;
     return [newLat, newLon];
 }
 
@@ -38,7 +36,7 @@ async function getJSON(url) {
     } catch (error) {
       throw error;
     }
-  }
+}
 
 function generateHTML(json) {
     console.log(json.name, json.main.temp);
@@ -47,11 +45,11 @@ function generateHTML(json) {
 async function runApp() {
     let userLoc = userInput.value;
     let userJSON = await getJSON(`https://api.openweathermap.org/data/2.5/weather?${handleInput(userLoc)}&appid=0a50dd3f495753d9c6b5685bdfa0aa0e`)
-    .then(antipodalCoord = calcAntipode(userJSON.coord.lon, userJSON.coord.lat))
-    .then(antipodeJSON = await getJSON(`https://api.openweathermap.org/data/2.5/weather?lat=${antipodalCoord[0]}&lon=${antipodalCoord[1]}&appid=0a50dd3f495753d9c6b5685bdfa0aa0e`))
-    .then(generateHTML(userJSON))
-    .then(generateHTML(antipodeJSON))
-    .finally(cube.style.transform = "rotateY(-270deg)");
+    let antipodalCoord = calcAntipode(userJSON.coord.lat, userJSON.coord.lon);
+    let antipodeJSON = await getJSON(`https://api.openweathermap.org/data/2.5/weather?lat=${antipodalCoord[0]}&lon=${antipodalCoord[1]}&appid=0a50dd3f495753d9c6b5685bdfa0aa0e`);
+    generateHTML(userJSON);
+    generateHTML(antipodeJSON);
+    cube.style.transform = "rotateY(-270deg)";
 }
 
 function resetApp() {
