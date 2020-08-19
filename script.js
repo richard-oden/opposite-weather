@@ -1,5 +1,8 @@
 const cube = document.getElementById("cube");
 const userInput = document.getElementById("user-input");
+const userOutput = document.getElementById("user-output");
+const antipodeOutput = document.getElementById("antipode-output");
+const iconURL = 'http://openweathermap.org/img/w/10d.png';
 
 function handleInput(inputStr) {
     let inputArr = inputStr.split(/(?:\s|\W)+/gm);
@@ -38,17 +41,28 @@ async function getJSON(url) {
     }
 }
 
-function generateHTML(json) {
-    console.log(json.name, json.main.temp);
+function formatTemp(temp) {
+    return `${Math.round(parseInt(temp))}&deg;`
+}
+
+function generateHTML(json, output) {
+    const name = json.name ? json.name : 'Somewhere in the ocean';
+    let html = '';
+    html += `<h3>${name}</h3>`
+    html += `<div class="current-temp">${formatTemp(json.main.temp)}</div>`;
+    html += `<div class="high-low"><span>${formatTemp(json.main.temp_max)}</span><span>${formatTemp(json.main.temp_min)}</span></div>`
+    html += `<img class="icon" src="http://openweathermap.org/img/w/${json.weather[0].icon}.png" alt="${json.weather[0].description}">`
+    html += `<div>${json.weather[0].description}</div>`
+    output.innerHTML = html;
 }
 
 async function runApp() {
     let userLoc = userInput.value;
-    let userJSON = await getJSON(`https://api.openweathermap.org/data/2.5/weather?${handleInput(userLoc)}&appid=0a50dd3f495753d9c6b5685bdfa0aa0e`)
+    let userJSON = await getJSON(`https://api.openweathermap.org/data/2.5/weather?${handleInput(userLoc)}&units=imperial&appid=0a50dd3f495753d9c6b5685bdfa0aa0e`)
     let antipodalCoord = calcAntipode(userJSON.coord.lat, userJSON.coord.lon);
-    let antipodeJSON = await getJSON(`https://api.openweathermap.org/data/2.5/weather?lat=${antipodalCoord[0]}&lon=${antipodalCoord[1]}&appid=0a50dd3f495753d9c6b5685bdfa0aa0e`);
-    generateHTML(userJSON);
-    generateHTML(antipodeJSON);
+    let antipodeJSON = await getJSON(`https://api.openweathermap.org/data/2.5/weather?lat=${antipodalCoord[0]}&lon=${antipodalCoord[1]}&units=imperial&appid=0a50dd3f495753d9c6b5685bdfa0aa0e`);
+    generateHTML(userJSON, userOutput);
+    generateHTML(antipodeJSON, antipodeOutput);
     cube.style.transform = "rotateY(-270deg)";
 }
 
