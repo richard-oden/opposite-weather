@@ -1,7 +1,8 @@
 /* Base Element Styles --------------- */
 
 * {
-	box-sizing: border-box;
+    box-sizing: border-box;
+    font: 1em 'Open Sans', sans-serif;
 }
 
 body {
@@ -94,6 +95,14 @@ h3 {
 .back>div {
     background-color: rgba(43, 68, 68, 0.6);
     font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: .6em;
+}
+
+.back h3 {
+    flex-basis: 25%;
 }
 
 .current-temp {
@@ -114,6 +123,11 @@ h3 {
 
 .high-low span:first-child {
     color: rgb(218, 50, 50)
+}
+
+.icon {
+    height: 4em;
+    object-fit: contain;
 }
 
 .back button {

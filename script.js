@@ -1,8 +1,8 @@
 const cube = document.getElementById("cube");
 const userInput = document.getElementById("user-input");
+const submitBtn = document.getElementById("submit");
 const userOutput = document.getElementById("user-output");
 const antipodeOutput = document.getElementById("antipode-output");
-const iconURL = 'http://openweathermap.org/img/w/10d.png';
 
 function handleInput(inputStr) {
     let inputArr = inputStr.split(/(?:\s|\W)+/gm);
@@ -69,3 +69,10 @@ async function runApp() {
 function resetApp() {
     cube.style.transform = "rotateY(0)";
 }
+
+userInput.addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      submit.click();
+    }
+  });
